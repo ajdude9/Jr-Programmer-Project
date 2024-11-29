@@ -14,9 +14,9 @@ public class MenuUIHandler : MonoBehaviour
 {
     public ColorPicker ColorPicker;
 
-    public void NewColorSelected(Color color)
+    public void NewColorSelected(Color colour)
     {
-        // add code here to handle when a color is selected
+        MainManager.instance.teamColour = colour;
     }
     
     private void Start()
