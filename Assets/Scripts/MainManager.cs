@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class MainManager : MonoBehaviour
@@ -35,5 +37,35 @@ public class MainManager : MonoBehaviour
             second instance managed to pass. Encapsulating the first-
             creation code within an 'else' statement prevents this.
         */
+
+        LoadColour();//Load the saved colour
+    }
+
+    [System.Serializable]
+    class SaveData
+    {
+        public Color TeamColour;
+    }
+
+    public void SaveColour()
+    {
+        SaveData data = new SaveData();//Create a new SaveData class object called data
+        data.TeamColour = teamColour;//Set the TeamColour color variable in data to the currently selected colour
+
+        String json = JsonUtility.ToJson(data);//Convert everything in the data SaveData class into json string
+
+        File.WriteAllText(Application.persistentDataPath + "/savefile.json", json);
+    }
+
+    public void LoadColour()
+    {
+        string path = Application.persistentDataPath + "/savefile.json";//Define the path as the path set in the save data    
+        if(File.Exists(path))//If we fine a file in the filepath
+        {
+            string json = File.ReadAllText(path);
+            SaveData data = JsonUtility.FromJson<SaveData>(json);
+
+            teamColour = data.TeamColour;
+        }
     }
 }
