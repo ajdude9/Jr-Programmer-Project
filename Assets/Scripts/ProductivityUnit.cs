@@ -27,8 +27,30 @@ public class ProductivityUnit : Unit
             if (pile != null)
             {
                 m_CurrentPile = pile;
-                m_CurrentPile.ProductionSpeed *=  ProductivityMultiplier;
+                m_CurrentPile.ProductionSpeed *= ProductivityMultiplier;
             }
         }
     }
+
+    public override void GoTo(Building target)
+    {
+        ResetProductivity(); // call your new method
+        base.GoTo(target); // run method from base class
+    }
+
+    public override void GoTo(Vector3 position)
+    {
+        ResetProductivity();
+        base.GoTo(position);
+    }
+
+    void ResetProductivity()
+    {
+        if (m_CurrentPile != null)
+        {
+            m_CurrentPile.ProductionSpeed /= ProductivityMultiplier;
+            m_CurrentPile = null;
+        }
+    }
+
 }
