@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing.Design;
 using UnityEngine;
 
 /// <summary>
@@ -10,7 +11,23 @@ public class ResourcePile : Building
 {
     public ResourceItem Item;
 
-    public float ProductionSpeed = 0.5f;
+    private float m_productionSpeed = 0.5f;
+    public float productionSpeed
+    {
+        get { return m_productionSpeed;  }//get returns the 'backing field'
+        set
+        {
+            if (value < 0.0f)//Make sure the value attemtping to be set isn't less than 0, which is not allowed
+            {
+                Debug.LogError("Production Speed cannot be a negative number.");
+            }
+            else
+            {
+                m_productionSpeed = value;//Original setter script
+            }
+
+        }//set uses the 'backing field'
+    }
 
     private float m_CurrentProduction = 0.0f;
 
@@ -26,13 +43,13 @@ public class ResourcePile : Building
         
         if (m_CurrentProduction < 1.0f)
         {
-            m_CurrentProduction += ProductionSpeed * Time.deltaTime;
+            m_CurrentProduction += m_productionSpeed * Time.deltaTime;
         }
     }
 
     public override string GetData()
     {
-        return $"Producing at the speed of {ProductionSpeed}/s";
+        return $"Producing at the speed of {m_productionSpeed}/s";
         
     }
     

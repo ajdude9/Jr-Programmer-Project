@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class MainManager : MonoBehaviour
 {
-    public static MainManager instance;//Static variables are shared by all instances of an object
+    public static MainManager instance { get; private set; }//Static variables are shared by all instances of an object; get allows it to be accessed from outside the class, while private set means it can only be changed within the class
     public Color teamColour;
     private int type;
     public static int numCreated = 0;
