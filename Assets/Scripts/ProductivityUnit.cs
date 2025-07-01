@@ -27,7 +27,7 @@ public class ProductivityUnit : Unit
             if (pile != null)
             {
                 m_CurrentPile = pile;
-                m_CurrentPile.ProductionSpeed *= ProductivityMultiplier;
+                m_CurrentPile.productionSpeed *= ProductivityMultiplier;
             }
         }
     }
@@ -48,7 +48,7 @@ public class ProductivityUnit : Unit
     {
         if (m_CurrentPile != null)
         {
-            m_CurrentPile.ProductionSpeed /= ProductivityMultiplier;
+            m_CurrentPile.productionSpeed /= ProductivityMultiplier;
             m_CurrentPile = null;
         }
     }

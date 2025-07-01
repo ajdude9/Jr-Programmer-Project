@@ -11,7 +11,7 @@ public class OptimManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        for (int i = 0; i < InstanceCount; ++i)
+        for (int i = 0; i < InstanceCount; i++)
         {
             Vector3 position = new Vector3(
             Random.Range(-Size.x, Size.x),
